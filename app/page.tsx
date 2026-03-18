@@ -63,111 +63,119 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 flex flex-col">
-      {/* Header */}
-      <header className="px-4 py-3 text-center shrink-0">
-        <span className="text-white font-semibold text-sm">RemoveBG</span>
-      </header>
-
-      {/* Main */}
-      <main className="flex-1 px-4 py-4 flex flex-col justify-center">
-        <div className="max-w-md mx-auto w-full">
-          {/* Title */}
-          <div className="text-center mb-4">
-            <h1 className="text-xl font-bold text-white mb-1">一键去除图片背景</h1>
-            <p className="text-white/70 text-xs">AI 智能识别，5 秒完成</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Header */}
+          <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+            <span className="font-semibold text-gray-800">RemoveBG</span>
+            <div className="flex space-x-4 text-sm">
+              <a href="#" className="text-gray-500 hover:text-gray-700">功能</a>
+              <a href="#" className="text-gray-500 hover:text-gray-700">价格</a>
+              <a href="#" className="text-gray-500 hover:text-gray-700">API</a>
+            </div>
           </div>
 
-          {/* Error */}
-          {error && (
-            <div className="mb-3 p-2 bg-red-500/30 rounded text-xs text-white text-center">
-              {error}
+          {/* Content */}
+          <div className="p-5">
+            {/* Title */}
+            <div className="text-center mb-4">
+              <h1 className="text-lg font-bold text-gray-800 mb-1">一键去除图片背景</h1>
+              <p className="text-gray-500 text-xs">AI 智能识别，5 秒完成，免费使用</p>
             </div>
-          )}
 
-          {/* Upload / Result */}
-          {!originalImage ? (
-            <label className="block bg-white rounded-xl cursor-pointer">
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                className="hidden"
-                onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-              />
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-400 transition-colors">
-                <p className="text-gray-700 text-sm font-medium">点击上传图片</p>
-                <p className="text-gray-400 text-xs mt-1">JPG/PNG/WEBP · 最大5MB</p>
+            {/* Error */}
+            {error && (
+              <div className="mb-3 p-2 bg-red-50 rounded text-xs text-red-600 text-center">
+                {error}
               </div>
-            </label>
-          ) : isProcessing ? (
-            <div className="bg-white rounded-xl p-6 text-center">
-              <div className="w-8 h-8 mx-auto border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
-              <p className="mt-3 text-gray-600 text-sm">AI 处理中...</p>
-            </div>
-          ) : (
-            <div className="bg-white rounded-xl p-3 space-y-3">
-              {/* Images */}
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <p className="text-xs text-gray-500 mb-1">原图</p>
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img src={originalImage} className="w-full h-full object-contain" alt="" />
+            )}
+
+            {/* Upload / Result */}
+            {!originalImage ? (
+              <label className="block cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                />
+                <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-400 hover:bg-blue-50/30 transition-colors">
+                  <p className="text-gray-700 text-sm font-medium">点击上传图片</p>
+                  <p className="text-gray-400 text-xs mt-1">支持 JPG、PNG、WEBP 格式，最大 5MB</p>
+                </div>
+              </label>
+            ) : isProcessing ? (
+              <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center">
+                <div className="w-6 h-6 mx-auto border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+                <p className="mt-2 text-gray-600 text-sm">AI 处理中...</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {/* Images */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <p className="text-xs text-gray-500 mb-1">原图</p>
+                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                      <img src={originalImage} className="w-full h-full object-contain" alt="" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 mb-1">去背景结果</p>
+                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden" style={{backgroundImage: 'linear-gradient(45deg,#e5e7eb 25%,transparent 25%),linear-gradient(-45deg,#e5e7eb 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e5e7eb 75%),linear-gradient(-45deg,transparent 75%,#e5e7eb 75%)',backgroundSize:'12px 12px'}}>
+                      {resultImage ? (
+                        <img src={resultImage} className="w-full h-full object-contain" alt="" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">处理失败</div>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500 mb-1">结果</p>
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden" style={{backgroundImage: 'linear-gradient(45deg,#e5e7eb 25%,transparent 25%),linear-gradient(-45deg,#e5e7eb 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e5e7eb 75%),linear-gradient(-45deg,transparent 75%,#e5e7eb 75%)',backgroundSize:'16px 16px'}}>
-                    {resultImage ? (
-                      <img src={resultImage} className="w-full h-full object-contain" alt="" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">失败</div>
-                    )}
-                  </div>
-                </div>
-              </div>
 
-              {/* Buttons */}
-              <div className="flex gap-2">
-                {resultImage && (
+                {/* Buttons */}
+                <div className="flex gap-2 pt-1">
+                  {resultImage && (
+                    <button
+                      onClick={handleDownload}
+                      className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      下载 PNG
+                    </button>
+                  )}
                   <button
-                    onClick={handleDownload}
-                    className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium"
+                    onClick={handleReset}
+                    className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
                   >
-                    下载 PNG
+                    处理新图片
                   </button>
-                )}
-                <button
-                  onClick={handleReset}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium"
-                >
-                  新图片
-                </button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Features - Compact */}
-          <div className="mt-6 flex justify-center space-x-6 text-center text-white text-xs">
-            <div>
-              <p className="font-medium">极速处理</p>
-              <p className="text-white/60">5秒完成</p>
-            </div>
-            <div>
-              <p className="font-medium">高清输出</p>
-              <p className="text-white/60">保留质量</p>
-            </div>
-            <div>
-              <p className="font-medium">隐私安全</p>
-              <p className="text-white/60">自动删除</p>
+            {/* Features */}
+            <div className="mt-5 pt-4 border-t border-gray-100 flex justify-center space-x-6 text-center text-xs">
+              <div>
+                <p className="font-medium text-gray-700">极速处理</p>
+                <p className="text-gray-400 mt-0.5">AI 5 秒完成</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">高清输出</p>
+                <p className="text-gray-400 mt-0.5">保留原图质量</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">隐私安全</p>
+                <p className="text-gray-400 mt-0.5">图片自动删除</p>
+              </div>
             </div>
           </div>
         </div>
-      </main>
 
-      {/* Footer */}
-      <footer className="text-center py-3 text-white/40 text-xs shrink-0">
-        © 2026 RemoveBG
-      </footer>
+        {/* Footer */}
+        <p className="text-center text-white/60 text-xs mt-4">
+          © 2026 RemoveBG · Powered by Remove.bg
+        </p>
+      </div>
     </div>
   )
 }
