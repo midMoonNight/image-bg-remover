@@ -43,13 +43,15 @@ export default function UploadZone({ onFileSelect, disabled }: UploadZoneProps) 
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={`
-        relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer
+        relative rounded-2xl p-8 sm:p-12 text-center cursor-pointer
         transition-all duration-300 ease-in-out
+        border-2 border-dashed
         ${isDragOver 
-          ? 'border-blue-500 bg-blue-50 scale-105' 
-          : 'border-gray-300 bg-white hover:border-blue-400 hover:bg-gray-50'
+          ? 'border-purple-400 bg-purple-500/20 scale-[1.02] shadow-lg shadow-purple-500/25' 
+          : 'border-purple-500/40 bg-white/5 hover:border-purple-400/60 hover:bg-white/10'
         }
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        backdrop-blur-sm
       `}
     >
       <input
@@ -61,24 +63,32 @@ export default function UploadZone({ onFileSelect, disabled }: UploadZoneProps) 
       />
       
       <div className="space-y-4">
-        <div className="mx-auto w-16 h-16 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        <div className={`
+          mx-auto w-20 h-20 rounded-full flex items-center justify-center
+          transition-all duration-300
+          ${isDragOver 
+            ? 'bg-purple-500/30 scale-110' 
+            : 'bg-purple-500/20'
+          }
+        `}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-purple-300">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M3 17.25V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75v10.5A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25z" />
           </svg>
         </div>
         
         <div>
-          <p className="text-lg font-medium text-gray-700">
+          <p className="text-lg font-medium text-white mb-1">
             拖拽图片到此处
           </p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-purple-300/70">
             或点击上传
           </p>
         </div>
         
-        <div className="text-xs text-gray-400">
-          <p>支持 JPG, PNG, WEBP 格式</p>
-          <p>最大 5MB</p>
+        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+          <span className="text-xs text-purple-300/60">支持 JPG, PNG, WEBP</span>
+          <span className="text-purple-500/40">|</span>
+          <span className="text-xs text-purple-300/60">最大 5MB</span>
         </div>
       </div>
     </div>
