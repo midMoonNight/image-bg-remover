@@ -43,7 +43,7 @@ export default function UploadZone({ onFileSelect, disabled }: UploadZoneProps) 
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={`
-        relative rounded-2xl p-6 text-center cursor-pointer
+        relative rounded-xl p-4 text-center cursor-pointer
         transition-all duration-200
         border-2
         ${isDragOver 
@@ -63,27 +63,27 @@ export default function UploadZone({ onFileSelect, disabled }: UploadZoneProps) 
       
       {/* Inner dashed border */}
       <div className={`
-        rounded-xl border-2 border-dashed p-6 transition-colors
+        rounded-lg border-2 border-dashed p-4 transition-colors
         ${isDragOver ? 'border-blue-400/60' : 'border-gray-600/60'}
       `}>
-        <div className="space-y-3">
+        <div className="space-y-2">
           {/* Upload icon */}
-          <div className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-7 h-7">
+          <div className="mx-auto w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M3 17.25V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75v10.5A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25z" />
             </svg>
           </div>
           
           <div>
-            <p className="text-base font-medium text-white">
+            <p className="text-sm font-medium text-white">
               拖拽图片到此处
             </p>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-xs text-gray-400 mt-0.5">
               或点击上传
             </p>
           </div>
           
-          <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
+          <div className="flex items-center justify-center space-x-1.5 text-xs text-gray-500">
             <span>支持 JPG, PNG, WEBP</span>
             <span className="text-gray-600">·</span>
             <span>最大 5MB</span>
