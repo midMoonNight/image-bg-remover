@@ -101,14 +101,9 @@ export default function Home() {
                 className="hidden"
                 onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
               />
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-400 transition-colors">
-                <div className="w-8 h-8 mx-auto mb-2 text-gray-400">
-                  <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                </div>
-                <p className="text-gray-700 text-sm font-medium mb-1">点击或拖拽上传图片</p>
-                <p className="text-gray-400 text-xs">JPG/PNG/WEBP · 最大5MB</p>
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-400 transition-colors">
+                <p className="text-gray-700 text-sm font-medium">点击上传图片</p>
+                <p className="text-gray-400 text-xs mt-1">JPG/PNG/WEBP · 最大5MB</p>
               </div>
             </label>
           ) : isProcessing ? (
